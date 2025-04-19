@@ -1,12 +1,12 @@
 [run]
 branch = True
 source =
-    dump1090exporter
+    ais-exporter
 
 [paths]
 source =
-    src/dump1090exporter
-    **/site-packages/dump1090exporter
+    src/ais_exporter
+    **/site-packages/ais_exporter
 
 [report]
 exclude_lines =

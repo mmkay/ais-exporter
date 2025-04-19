@@ -9,7 +9,7 @@ PYTHON := python3
 # Do not remove this block. It is used by the 'help' rule when
 # constructing the help output.
 # help:
-# help: dump1090exporter Makefile help
+# help: ais-exporter Makefile help
 # help:
 
 
@@ -63,32 +63,32 @@ coverage:
 .PHONY: style
 style:
 	@isort . --profile black
-	@black src/dump1090exporter setup.py tests
+	@black src/ais_exporter setup.py tests
 
 
 # help: check-style           - perform code format compliance check
 .PHONY: check-style
 check-style:
 	@isort . --check-only --profile black
-	@black --check src/dump1090exporter setup.py tests
+	@black --check src/ais_exporter setup.py tests
 
 
 # help: check-types           - check type hint annotations
 .PHONY: check-types
 check-types:
-	@cd src; mypy -p dump1090exporter --ignore-missing-imports
+	@cd src; mypy -p ais-exporter --ignore-missing-imports
 
 
 # help: check-lint            - run static analysis checks
 .PHONY: check-lint
 check-lint:
-	@pylint --rcfile=.pylintrc dump1090exporter setup.py tests
+	@pylint --rcfile=.pylintrc ais-exporter setup.py tests
 
 
 # help: container             - build Docker container
 .PHONY: container
 container: dist
-	@docker build -t clawsicus/dump1090exporter .
+	@docker build -t clawsicus/ais-exporter .
 
 
 # help: checks                - perform all checks
@@ -106,7 +106,7 @@ dist:
 # help: dist-upload           - upload a wheel distribution package
 .PHONY: dist-upload
 dist-upload: dist
-	@twine upload dist/dump1090exporter-*-py3-none-any.whl
+	@twine upload dist/ais-exporter-*-py3-none-any.whl
 
 
 # Keep these lines at the end of the file to retain nice help

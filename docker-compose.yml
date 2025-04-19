@@ -1,10 +1,10 @@
 ---
 services:
-  dump1090-exporter:
-    image: ghcr.io/mmkay/dump1090-exporter:main
-    container_name: dump1090-exporter
+  ais-exporter:
+    image: ghcr.io/mmkay/ais-exporter:main
+    container_name: ais-exporter
     environment:
-      - RESOURCE_PATH=http://172.17.0.1:8080/data/
+      - RESOURCE_PATH=http://172.17.0.1:8383/
     ports:
-      - 9105:9105
+      - 9205:9205
     restart: unless-stopped

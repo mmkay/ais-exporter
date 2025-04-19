@@ -153,7 +153,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "dump1090_lat",
+          "expr": "ais_lat",
           "format": "table",
           "instant": true,
           "legendFormat": "__auto",
@@ -167,7 +167,7 @@
           },
           "editorMode": "builder",
           "exemplar": false,
-          "expr": "dump1090_lon",
+          "expr": "ais_lon",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -182,7 +182,7 @@
           },
           "editorMode": "builder",
           "exemplar": false,
-          "expr": "dump1090_heading",
+          "expr": "ais_heading",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -197,7 +197,7 @@
           },
           "editorMode": "builder",
           "exemplar": false,
-          "expr": "dump1090_alt",
+          "expr": "ais_alt",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -314,7 +314,7 @@
             "uid": "PC34A0BC456D4E3FE"
           },
           "editorMode": "code",
-          "expr": "count(count by (hex) (dump1090_lat))",
+          "expr": "count(count by (hex) (ais_lat))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -375,7 +375,7 @@
             "uid": "PC34A0BC456D4E3FE"
           },
           "editorMode": "code",
-          "expr": "count(count by (reg) (dump1090_lat))",
+          "expr": "count(count by (reg) (ais_lat))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -436,7 +436,7 @@
             "uid": "PC34A0BC456D4E3FE"
           },
           "editorMode": "code",
-          "expr": "count(count by (type) (dump1090_lat))",
+          "expr": "count(count by (type) (ais_lat))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -528,7 +528,7 @@
             "uid": "PC34A0BC456D4E3FE"
           },
           "editorMode": "code",
-          "expr": "dump1090_recent_aircraft_with_position",
+          "expr": "ais_recent_ships_with_position",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -591,7 +591,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "topk(50, count by (type) (dump1090_lat{type!=\"\"}))",
+          "expr": "topk(50, count by (type) (ais_lat{type!=\"\"}))",
           "instant": true,
           "legendFormat": "__auto",
           "range": false,
@@ -655,7 +655,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "topk(50, count by (country) (label_replace(dump1090_lat{reg!=\"\"}, \"country\", \"$1\", \"reg\", \"(.*)-.+\")))",
+          "expr": "topk(50, count by (country) (label_replace(ais_lat{reg!=\"\"}, \"country\", \"$1\", \"reg\", \"(.*)-.+\")))",
           "instant": true,
           "legendFormat": "__auto",
           "range": false,

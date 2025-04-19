@@ -8,7 +8,7 @@ global:
 # Here it's Prometheus itself.
 scrape_configs:
 
-  - job_name: 'dump1090'
+  - job_name: 'ais'
     scrape_interval: 5s
     static_configs:
-      - targets: ['dump1090exporter:9105']
+      - targets: ['ais-exporter:9205']

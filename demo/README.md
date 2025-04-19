@@ -2,15 +2,15 @@
 # Demonstration Environment
 
 The following instructions describe a method for creating a local test
-environment that demonstrates using the dump1090exporter alongside Prometheus
+environment that demonstrates using the ais-exporter alongside Prometheus
 and Grafana.
 
-It uses Docker-Compose to orchestrate dump1090exporter, Prometheus and
+It uses Docker-Compose to orchestrate ais-exporter, Prometheus and
 Grafana to facilitate experimentation with metric collection and graphing.
 
-Configure the command line arguments supplied to dump1090exporter for your
+Configure the command line arguments supplied to ais-exporter for your
 specific environment. Edit the ``docker-compose.yml`` file in this directory
-and replace the following block with settings for your specific dump1090
+and replace the following block with settings for your specific ais
 instance:
 
 ``` yaml
@@ -20,7 +20,7 @@ command: [
   "--longitude=138.6007"]
 ```
 
-Build the dump1090exporter Python package and then return to this directory.
+Build the ais-exporter Python package and then return to this directory.
 ```
 $ cd ..
 $ make venv
@@ -30,7 +30,7 @@ $ source venv/bin/activate
 $ cd demo
 ```
 
-Start everything up. This will build a new dump1090exporter container the
+Start everything up. This will build a new ais-exporter container the
 first time it is run.
 
 ```
@@ -41,7 +41,7 @@ $ docker compose up
   > ensure everything is cleanly shutdown. If you also want to remove the
   > volumes then use ``docker compose down -v``.
 
-You should now have a dump1090exporter, Prometheus and Grafana environment
+You should now have a ais-exporter, Prometheus and Grafana environment
 running that you can experiment with. Grafana should now be accessible at
 ``http://localhost:3000``. Login to Grafana with credentials shown below.
 
@@ -50,9 +50,9 @@ username - admin
 password - foobar
 ```
 
-Once logged in you should be able to view the dump1090exporter dashboard. You
+Once logged in you should be able to view the ais-exporter dashboard. You
 may need to click the dashboard selector dropdown ``Home`` to select the
-dump1090exporter dashboard.
+ais-exporter dashboard.
 
   > Recent versions of Grafana added the concept of provisioning which assists
   > with the process of automatically adding Datasources and Dashboards. The
@@ -60,6 +60,6 @@ dump1090exporter dashboard.
   > ``dashboards`` directories. These directories contain YAML files which
   > specify which datasource or dashboards should be installed automatically.
   >
-  > The dump1090exporter dashboard has been added into the
+  > The ais-exporter dashboard has been added into the
   > ``/grafana/provisioning/dashboards`` so that it will be available by
   > default. You should be able to select and display it.

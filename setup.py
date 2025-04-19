@@ -7,7 +7,7 @@ regexp = re.compile(r".*__version__ = [\'\"](.*?)[\'\"]", re.S)
 
 
 init_file = os.path.join(
-    os.path.dirname(__file__), "src", "dump1090exporter", "__init__.py"
+    os.path.dirname(__file__), "src", "ais-exporter", "__init__.py"
 )
 with open(init_file, "r") as f:  # pylint: disable=unspecified-encoding
     module_content = f.read()
@@ -35,16 +35,16 @@ def parse_requirements(filename):
 if __name__ == "__main__":
 
     setup(
-        name="dump1090exporter",
+        name="ais-exporter",
         version=version,
         author="Chris Laws",
         author_email="clawsicus@gmail.com",
-        description="A Prometheus metrics exporter for the dump1090 Mode S decoder for RTLSDR",
+        description="A Prometheus metrics exporter for the ais Mode S decoder for RTLSDR",
         long_description_content_type="text/markdown",
         long_description=readme,
         license="MIT",
-        keywords=["prometheus", "monitoring", "metrics", "dump1090", "ADSB"],
-        url="https://github.com/claws/dump1090-exporter",
+        keywords=["prometheus", "monitoring", "metrics", "ais", "ADSB"],
+        url="https://github.com/claws/ais-exporter",
         package_dir={"": "src"},
         packages=find_packages("src"),
         install_requires=parse_requirements("requirements.txt"),
@@ -66,6 +66,6 @@ if __name__ == "__main__":
             "Topic :: System :: Monitoring",
         ],
         entry_points={
-            "console_scripts": ["dump1090exporter = dump1090exporter.__main__:main"]
+            "console_scripts": ["ais-exporter = ais-exporter.__main__:main"]
         },
     )

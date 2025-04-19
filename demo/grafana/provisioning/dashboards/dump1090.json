@@ -54,7 +54,7 @@
       }
     ]
   },
-  "description": "This dashboard displays dump1090 metrics that get exposed to Prometheus by the dump1090exporter.",
+  "description": "This dashboard displays ais metrics that get exposed to Prometheus by the ais-exporter.",
   "editable": true,
   "gnetId": 768,
   "graphTooltip": 0,
@@ -127,18 +127,18 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "dump1090_recent_aircraft_observed{job=\"dump1090\", time_period=\"latest\"}",
+          "expr": "ais_recent_ships_observed{job=\"ais\", time_period=\"latest\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "",
-          "metric": "dump1090_recent_",
+          "metric": "ais_recent_",
           "refId": "A",
           "step": 2
         }
       ],
       "thresholds": "",
       "timeFrom": "1s",
-      "title": "Aircraft Total",
+      "title": "ships Total",
       "type": "singlestat",
       "valueFontSize": "80%",
       "valueMaps": [
@@ -216,18 +216,18 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "dump1090_recent_aircraft_with_position{job=\"dump1090\", time_period=\"latest\"}",
+          "expr": "ais_recent_ships_with_position{job=\"ais\", time_period=\"latest\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "",
-          "metric": "dump1090_recent_",
+          "metric": "ais_recent_",
           "refId": "A",
           "step": 2
         }
       ],
       "thresholds": "",
       "timeFrom": "1s",
-      "title": "Aircraft w/ Position",
+      "title": "ships w/ Position",
       "type": "singlestat",
       "valueFontSize": "80%",
       "valueMaps": [
@@ -306,11 +306,11 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "dump1090_recent_aircraft_max_range{job=\"dump1090\"}",
+          "expr": "ais_recent_ships_max_range{job=\"ais\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "",
-          "metric": "dump1090_aircraft_recent_max_range",
+          "metric": "ais_ships_recent_max_range",
           "refId": "A",
           "step": 2
         }
@@ -395,11 +395,11 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "rate(dump1090_messages_total{job=\"dump1090\", time_period=\"latest\"}[1m])",
+          "expr": "rate(ais_messages_total{job=\"ais\", time_period=\"latest\"}[1m])",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "",
-          "metric": "dump1090_aircraft_recent_max_range",
+          "metric": "ais_ships_recent_max_range",
           "refId": "A",
           "step": 2
         }
@@ -484,7 +484,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "dump1090_stats_local_peak_signal_strength_dbFS{job=\"dump1090\", time_period=\"last1min\"}",
+          "expr": "ais_stats_local_peak_signal_strength_dbFS{job=\"ais\", time_period=\"last1min\"}",
           "format": "time_series",
           "interval": "1s",
           "intervalFactor": 1,
@@ -575,11 +575,11 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "dump1090_stats_local_signal_strength_dbFS{job=\"dump1090\", time_period=\"last1min\"}",
+          "expr": "ais_stats_local_signal_strength_dbFS{job=\"ais\", time_period=\"last1min\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "",
-          "metric": "dump1090_aircraft_recent_max_range",
+          "metric": "ais_ships_recent_max_range",
           "refId": "A",
           "step": 2
         }
@@ -641,16 +641,16 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "dump1090_recent_aircraft_observed{job=\"dump1090\", time_period=\"latest\"}",
+          "expr": "ais_recent_ships_observed{job=\"ais\", time_period=\"latest\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "total",
-          "metric": "recent_aircraft_observed",
+          "metric": "recent_ships_observed",
           "refId": "A",
           "step": 10
         },
         {
-          "expr": "dump1090_recent_aircraft_with_position{job=\"dump1090\", time_period=\"latest\"}",
+          "expr": "ais_recent_ships_with_position{job=\"ais\", time_period=\"latest\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "W/ position",
@@ -658,7 +658,7 @@
           "step": 10
         },
         {
-          "expr": "dump1090_recent_aircraft_observed{job=\"dump1090\", time_period=\"latest\"} - dump1090_recent_aircraft_with_position{job=\"dump1090\", time_period=\"latest\"}",
+          "expr": "ais_recent_ships_observed{job=\"ais\", time_period=\"latest\"} - ais_recent_ships_with_position{job=\"ais\", time_period=\"latest\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Wo/ position",
@@ -666,7 +666,7 @@
           "step": 10
         },
         {
-          "expr": "dump1090_recent_aircraft_with_multilateration{job=\"dump1090\", time_period=\"latest\"}",
+          "expr": "ais_recent_ships_with_multilateration{job=\"ais\", time_period=\"latest\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "mlat",
@@ -678,7 +678,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Aircraft",
+      "title": "ships",
       "tooltip": {
         "msResolution": true,
         "shared": true,
@@ -717,7 +717,7 @@
       }
     },
     {
-      "content": "#### Aircraft\nThis graph displays the counts of aircraft (e.g unique ICAO) being reported. Aircraft are grouped into total aircraft being reported, aircraft reported with a position, aircraft reported without a position and aircraft reported that have multi-lateration reports.",
+      "content": "#### ships\nThis graph displays the counts of ships (e.g unique ICAO) being reported. ships are grouped into total ships being reported, ships reported with a position, ships reported without a position and ships reported that have multi-lateration reports.",
       "editable": true,
       "error": false,
       "gridPos": {
@@ -778,7 +778,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "dump1090_recent_aircraft_max_range{job=\"dump1090\", time_period=\"latest\"}",
+          "expr": "ais_recent_ships_max_range{job=\"ais\", time_period=\"latest\"}",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 2,
@@ -831,7 +831,7 @@
       }
     },
     {
-      "content": "##### Maximum Range\nThis graph displays the maximum range of the currently observed aircraft reporting a position.",
+      "content": "##### Maximum Range\nThis graph displays the maximum range of the currently observed ships reporting a position.",
       "editable": true,
       "error": false,
       "gridPos": {
@@ -890,16 +890,16 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "rate(dump1090_messages_total{job=\"dump1090\", time_period=\"latest\"}[1m])",
+          "expr": "rate(ais_messages_total{job=\"ais\", time_period=\"latest\"}[1m])",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "latest",
-          "metric": "dump1090_messages_total",
+          "metric": "ais_messages_total",
           "refId": "A",
           "step": 10
         },
         {
-          "expr": "dump1090_stats_messages_total{job=\"dump1090\", time_period=\"last1min\"} / 60",
+          "expr": "ais_stats_messages_total{job=\"ais\", time_period=\"last1min\"} / 60",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "last1min",
@@ -1011,29 +1011,29 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "dump1090_stats_local_signal_strength_dbFS{job=\"dump1090\", time_period=\"last1min\"}",
+          "expr": "ais_stats_local_signal_strength_dbFS{job=\"ais\", time_period=\"last1min\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "mean",
-          "metric": "dump1090_stats_local_signal_strength_dbFS",
+          "metric": "ais_stats_local_signal_strength_dbFS",
           "refId": "A",
           "step": 10
         },
         {
-          "expr": "dump1090_stats_local_peak_signal_strength_dbFS{job=\"dump1090\", time_period=\"last1min\"}",
+          "expr": "ais_stats_local_peak_signal_strength_dbFS{job=\"ais\", time_period=\"last1min\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "peak",
-          "metric": "dump1090_stats_local_peak_signal_strength_dbFS",
+          "metric": "ais_stats_local_peak_signal_strength_dbFS",
           "refId": "B",
           "step": 10
         },
         {
-          "expr": "dump1090_stats_local_noise_level_dbFS{job=\"dump1090\", time_period=\"last1min\"}",
+          "expr": "ais_stats_local_noise_level_dbFS{job=\"ais\", time_period=\"last1min\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "noise",
-          "metric": "dump1090_stats_local_noise_level_dbFS",
+          "metric": "ais_stats_local_noise_level_dbFS",
           "refId": "C",
           "step": 10
         }
@@ -1149,7 +1149,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "dump1090_stats_cpu_demod_milliseconds{job=\"dump1090\", time_period=\"last1min\"}",
+          "expr": "ais_stats_cpu_demod_milliseconds{job=\"ais\", time_period=\"last1min\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "demod",
@@ -1158,7 +1158,7 @@
           "step": 10
         },
         {
-          "expr": "dump1090_stats_cpu_reader_milliseconds{job=\"dump1090\", time_period=\"last1min\"}",
+          "expr": "ais_stats_cpu_reader_milliseconds{job=\"ais\", time_period=\"last1min\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "usb",
@@ -1167,7 +1167,7 @@
           "step": 10
         },
         {
-          "expr": "dump1090_stats_cpu_background_milliseconds{job=\"dump1090\", time_period=\"last1min\"}",
+          "expr": "ais_stats_cpu_background_milliseconds{job=\"ais\", time_period=\"last1min\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "other",
@@ -1219,7 +1219,7 @@
       }
     },
     {
-      "content": "##### CPU Utilisation\nThis graph displays how much CPU time is used by the dump1090 tool. demod reports the time spent demodulating and decoding data from the USB SDR dongle. usb reports time spent reading sample data from the USB SDR dongle. other reports time spent doing network I/O, processing network messages, and periodic tasks.\n",
+      "content": "##### CPU Utilisation\nThis graph displays how much CPU time is used by the ais tool. demod reports the time spent demodulating and decoding data from the USB SDR dongle. usb reports time spent reading sample data from the USB SDR dongle. other reports time spent doing network I/O, processing network messages, and periodic tasks.\n",
       "editable": true,
       "error": false,
       "gridPos": {
@@ -1273,7 +1273,7 @@
     ]
   },
   "timezone": "browser",
-  "title": "dump1090exporter",
+  "title": "ais-exporter",
   "uid": "jYDJZoviz",
   "version": 3
 }

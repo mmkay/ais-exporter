@@ -2,8 +2,8 @@
 This module defines the metrics that will be exposed to Prometheus.
 
 The metrics are grouped under two top level keys which represent the two data
-files that the data is extracted from. Aircraft metrics are extracted from the
-data/aircraft.json file. Statistics metrics are extracted from the
+files that the data is extracted from. ships metrics are extracted from the
+data/ships.json file. Statistics metrics are extracted from the
 data/stats.json file.
 
 Each metric specification item consists of a 3-tuple. The first element
@@ -12,96 +12,96 @@ object. The next two elements represent the Prometheus metric label and its
 help string.
 
 When the application creates the actual Prometheus metrics labels it prefixes
-`dump1090_` onto each label to namespace the metrics under a common name. In
+`ais_` onto each label to namespace the metrics under a common name. In
 the case of the stats group of metrics it also adds a `stats_` to the prefix
 to group the stats with a common label prefix.
 
-So an item listed under the aircraft section, for example the 'messages_total'
+So an item listed under the ships section, for example the 'messages_total'
 item, will end up with a Prometheus metric label of:
 
 .. code-block:: console
 
-    dump1090_messages_total
+    ais_messages_total
 
 An item listed under the stats section, for example the 'stats_messages_total'
 item, will end up with a Prometheus metric label of:
 
 .. code-block:: console
 
-    dump1090_stats_messages_total
+    ais_stats_messages_total
 
-There are multiple sections in the dump1090 stats data file. The Prometheus
+There are multiple sections in the ais stats data file. The Prometheus
 multi-dimensional metrics labels are used to expose these. So, to obtain the
 stats metrics for the last1min group you would use a metrics label of:
 
 .. code-block:: console
 
-    dump1090_stats_messages_total{job="dump1090", time_period="last1min"}
+    ais_stats_messages_total{job="ais", time_period="last1min"}
 
-To extract the totals since the dump1090 application started:
+To extract the totals since the ais application started:
 
 .. code-block:: console
 
-    dump1090_stats_messages_total{job="dump1090", time_period="total"}
+    ais_stats_messages_total{job="ais", time_period="total"}
 
 """
 
 Specs = {
-    "aircraft": (
-        (
-            "observed",
-            "recent_aircraft_observed",
-            "Number of aircraft recently observed",
-        ),
-        (
-            "observed_with_pos",
-            "recent_aircraft_with_position",
-            "Number of aircraft recently observed with position",
-        ),
-        (
-            "observed_with_direction",
-            "recent_aircraft_with_direction",
-            "Number of aircraft recently observed with direction relative to receiver",
-        ),
-        (
-            "observed_with_mlat",
-            "recent_aircraft_with_multilateration",
-            "Number of aircraft recently observed with multilateration",
-        ),
-        (
-            "max_range",
-            "recent_aircraft_max_range",
-            "Maximum range of recently observed aircraft",
-        ),
-        (
-            "max_range_by_direction",
-            "recent_aircraft_max_range_by_direction",
-            "Maximum range of recently observed aircraft by direction relative to receiver",
-        ),
-        (
-            "messages_total",
-            "messages_total",
-            "Number of Mode-S messages processed since start up",
-        ),
+    "ships": (
+        # (
+        #     "observed",
+        #     "recent_ships_observed",
+        #     "Number of ships recently observed",
+        # ),
+        # (
+        #     "observed_with_pos",
+        #     "recent_ships_with_position",
+        #     "Number of ships recently observed with position",
+        # ),
+        # (
+        #     "observed_with_direction",
+        #     "recent_ships_with_direction",
+        #     "Number of ships recently observed with direction relative to receiver",
+        # ),
+        # (
+        #     "observed_with_mlat",
+        #     "recent_ships_with_multilateration",
+        #     "Number of ships recently observed with multilateration",
+        # ),
+        # (
+        #     "max_range",
+        #     "recent_ships_max_range",
+        #     "Maximum range of recently observed ships",
+        # ),
+        # (
+        #     "max_range_by_direction",
+        #     "recent_ships_max_range_by_direction",
+        #     "Maximum range of recently observed ships by direction relative to receiver",
+        # ),
+        # (
+        #     "messages_total",
+        #     "messages_total",
+        #     "Number of Mode-S messages processed since start up",
+        # ),
         (
             "lat",
             "lat",
-            "Latitude of an aircraft",
+            "Latitude of a ship",
         ),
         (
             "lon",
             "lon",
-            "Longitude of an aircraft",
+            "Longitude of a ship",
         ),
-        (
-            "alt",
-            "alt",
-            "Altitude of an aircraft",
-        ),
+        # (
+        #     "alt",
+        #     "alt",
+        #     "Altitude of an ships",
+        # ),
         (
             "heading",
             "heading",
-            "Heading of an aircraft",
+            "Heading of a ship",
         ),
     ),
     "stats": {
@@ -143,9 +143,9 @@ Specs = {
                 "Global positions rejected due to speed check",
             ),
             (
-                "local_aircraft_relative",
-                "stats_cpr_local_aircraft_relative",
-                "Local positions found relative to a previous aircraft position",
+                "local_ships_relative",
+                "stats_cpr_local_ships_relative",
+                "Local positions found relative to a previous ships position",
             ),
             (
                 "local_ok",

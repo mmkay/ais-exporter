@@ -1,6 +1,6 @@
 import unittest
 
-import dump1090exporter.metrics
+import ais-exporter.metrics
 
 
 class TestMetrics(unittest.TestCase):
@@ -8,17 +8,17 @@ class TestMetrics(unittest.TestCase):
 
     def test_specification(self):
         """check structure of specification"""
-        self.assertIsInstance(dump1090exporter.metrics.Specs, dict)
+        self.assertIsInstance(ais-exporter.metrics.Specs, dict)
 
-        self.assertIn("aircraft", dump1090exporter.metrics.Specs)
-        v = dump1090exporter.metrics.Specs["aircraft"]
+        self.assertIn("ships", ais-exporter.metrics.Specs)
+        v = ais-exporter.metrics.Specs["ships"]
         self.assertIsInstance(v, tuple)
         for i in v:
             self.assertIsInstance(i, tuple)
             self.assertEqual(len(i), 3)
 
-        self.assertIn("stats", dump1090exporter.metrics.Specs)
-        v = dump1090exporter.metrics.Specs["stats"]
+        self.assertIn("stats", ais-exporter.metrics.Specs)
+        v = ais-exporter.metrics.Specs["stats"]
         self.assertIsInstance(v, dict)
         for k1, v1 in v.items():
             self.assertIsInstance(k1, str)

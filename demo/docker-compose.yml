@@ -6,11 +6,11 @@ volumes:
 
 services:
 
-  dump1090exporter:
-    container_name: dump1090exporter
+  ais-exporter:
+    container_name: ais-exporter
     build: ${PWD}/..
     ports:
-      - "9105:9105"
+      - "9205:9205"
     restart: always
     stop_signal: SIGINT
     command: [
@@ -22,7 +22,7 @@ services:
     container_name: prometheus
     image: prom/prometheus
     depends_on:
-      - dump1090exporter
+      - ais-exporter
     volumes:
       - ${PWD}/prometheus/:/etc/prometheus/
       - ${PWD}/prometheus:/prometheus

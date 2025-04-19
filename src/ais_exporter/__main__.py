@@ -3,7 +3,7 @@ import asyncio
 import logging
 import os
 
-from .exporter import Dump1090Exporter
+from .exporter import ais_exporter
 
 # try to import uvloop - optional
 try:
@@ -14,29 +14,27 @@ except ImportError:
     pass
 
 
-DEFAULT_RESOURCE_PATH = "http://localhost:8080/data"
-DEFAULT_DB_PATH = "http://localhost:8080/db"
+DEFAULT_RESOURCE_PATH = "http://localhost:8383"
 DEFAULT_HOST = "0.0.0.0"
-DEFAULT_PORT = 9105
-DEFAULT_RECEIVER_REFRESH_INTERVAL = 10
-DEFAULT_AIRCRAFT_REFRESH_INTERVAL = 10
+DEFAULT_PORT = 9205
+DEFAULT_SHIPS_REFRESH_INTERVAL = 10
 DEFAULT_STATISTICS_REFRESH_INTERVAL = 60
 LOGGING_CHOICES = ["error", "warning", "info", "debug"]
 DEFAULT_LOGGING_LEVEL = "info"
 
 
 def main():
-    """Run the dump1090 Prometheus exporter"""
+    """Run the ais Prometheus exporter"""
 
     parser = argparse.ArgumentParser(
-        prog="dump1090exporter", description="dump1090 Prometheus Exporter"
+        prog="ais-exporter", description="ais Prometheus Exporter"
     )
     parser.add_argument(
         "--resource-path",
-        metavar="<dump1090 url or dirpath>",
+        metavar="<ais url or dirpath>",
         type=str,
         default=os.environ.get("RESOURCE_PATH") or DEFAULT_RESOURCE_PATH,
-        help=f"dump1090 data URL or file system path. Default value is {DEFAULT_RESOURCE_PATH}",
+        help=f"ais data URL or file system path. Default value is {DEFAULT_RESOURCE_PATH}",
     )
     parser.add_argument(
         "--host",
@@ -56,13 +54,13 @@ def main():
         help=f"The port to expose collected metrics on. Default is {DEFAULT_PORT}",
     )
     parser.add_argument(
-        "--aircraft-interval",
-        metavar="<aircraft data refresh interval>",
+        "--ships-interval",
+        metavar="<ships data refresh interval>",
         type=int,
-        default=os.environ.get("AIRCRAFT_INTERVAL") or DEFAULT_AIRCRAFT_REFRESH_INTERVAL,
+        default=os.environ.get("ships_INTERVAL") or DEFAULT_SHIPS_REFRESH_INTERVAL,
         help=(
-            "The number of seconds between updates of the aircraft data. "
-            f"Default is {DEFAULT_AIRCRAFT_REFRESH_INTERVAL} seconds"
+            "The number of seconds between updates of the ships data. "
+            f"Default is {DEFAULT_SHIPS_REFRESH_INTERVAL} seconds"
         ),
     )
     parser.add_argument(
@@ -73,16 +71,6 @@ def main():
         help=(
             "The number of seconds between updates of the stats data. "
             f"Default is {DEFAULT_STATISTICS_REFRESH_INTERVAL} seconds"
-        ),
-    )
-    parser.add_argument(
-        "--receiver-interval",
-        metavar="<receiver data refresh interval>",
-        type=int,
-        default=os.environ.get("RECEIVER_INTERVAL") or DEFAULT_RECEIVER_REFRESH_INTERVAL,
-        help=(
-            "The number of seconds between updates of the receiver data. "
-            f"Default is {DEFAULT_RECEIVER_REFRESH_INTERVAL} seconds"
         ),
     )
     parser.add_argument(
@@ -106,13 +94,6 @@ def main():
         type=str,
         help=f"A logging level from {LOGGING_CHOICES}. Default value is '{DEFAULT_LOGGING_LEVEL}'.",
     )
-    parser.add_argument(
-        "--db-path",
-        metavar="<dump1090 url>",
-        type=str,
-        default=os.environ.get("DB_PATH") or "",
-        help=f"dump1090 data URL. Default value is an empty string, meaning database will not be fetched.",
-    )
 
     args = parser.parse_args()
 
@@ -127,15 +108,13 @@ def main():
         args.origin = (args.latitude, args.longitude)
 
     loop = asyncio.get_event_loop()
-    mon = Dump1090Exporter(
+    mon = ais_exporter(
         resource_path=args.resource_path,
         host=args.host,
         port=args.port,
-        aircraft_interval=args.aircraft_interval,
+        ships_interval=args.ships_interval,
         stats_interval=args.stats_interval,
-        receiver_interval=args.receiver_interval,
         origin=args.origin,
-        db_path=args.db_path,
     )
     loop.run_until_complete(mon.start())
     try:
