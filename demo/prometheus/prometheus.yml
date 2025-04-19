@@ -11,4 +11,4 @@ scrape_configs:
   - job_name: 'ais'
     scrape_interval: 5s
     static_configs:
-      - targets: ['ais-exporter:9205']
+      - targets: ['aisexporter:9205']

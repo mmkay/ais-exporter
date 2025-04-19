@@ -6,8 +6,8 @@ volumes:
 
 services:
 
-  ais-exporter:
-    container_name: ais-exporter
+  aisexporter:
+    container_name: aisexporter
     build: ${PWD}/..
     ports:
       - "9205:9205"
@@ -22,7 +22,7 @@ services:
     container_name: prometheus
     image: prom/prometheus
     depends_on:
-      - ais-exporter
+      - aisexporter
     volumes:
       - ${PWD}/prometheus/:/etc/prometheus/
       - ${PWD}/prometheus:/prometheus

@@ -1,8 +1,8 @@
 ---
 services:
-  ais-exporter:
-    image: ghcr.io/mmkay/ais-exporter:main
-    container_name: ais-exporter
+  aisexporter:
+    image: ghcr.io/mmkay/aisexporter:main
+    container_name: aisexporter
     environment:
       - RESOURCE_PATH=http://172.17.0.1:8383/
     ports:

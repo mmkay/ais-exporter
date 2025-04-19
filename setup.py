@@ -35,7 +35,7 @@ def parse_requirements(filename):
 if __name__ == "__main__":
 
     setup(
-        name="ais-exporter",
+        name="aisexporter",
         version=version,
         author="Chris Laws",
         author_email="clawsicus@gmail.com",
@@ -44,7 +44,7 @@ if __name__ == "__main__":
         long_description=readme,
         license="MIT",
         keywords=["prometheus", "monitoring", "metrics", "ais", "ADSB"],
-        url="https://github.com/claws/ais-exporter",
+        url="https://github.com/claws/aisexporter",
         package_dir={"": "src"},
         packages=find_packages("src"),
         install_requires=parse_requirements("requirements.txt"),
@@ -66,6 +66,6 @@ if __name__ == "__main__":
             "Topic :: System :: Monitoring",
         ],
         entry_points={
-            "console_scripts": ["ais-exporter = aisexporter.__main__:main"]
+            "console_scripts": ["aisexporter = aisexporter.__main__:main"]
         },
     )

@@ -2,13 +2,13 @@
 # Demonstration Environment
 
 The following instructions describe a method for creating a local test
-environment that demonstrates using the ais-exporter alongside Prometheus
+environment that demonstrates using the aisexporter alongside Prometheus
 and Grafana.
 
-It uses Docker-Compose to orchestrate ais-exporter, Prometheus and
+It uses Docker-Compose to orchestrate aisexporter, Prometheus and
 Grafana to facilitate experimentation with metric collection and graphing.
 
-Configure the command line arguments supplied to ais-exporter for your
+Configure the command line arguments supplied to aisexporter for your
 specific environment. Edit the ``docker-compose.yml`` file in this directory
 and replace the following block with settings for your specific ais
 instance:
@@ -20,7 +20,7 @@ command: [
   "--longitude=138.6007"]
 ```
 
-Build the ais-exporter Python package and then return to this directory.
+Build the aisexporter Python package and then return to this directory.
 ```
 $ cd ..
 $ make venv
@@ -30,7 +30,7 @@ $ source venv/bin/activate
 $ cd demo
 ```
 
-Start everything up. This will build a new ais-exporter container the
+Start everything up. This will build a new aisexporter container the
 first time it is run.
 
 ```
@@ -41,7 +41,7 @@ $ docker compose up
   > ensure everything is cleanly shutdown. If you also want to remove the
   > volumes then use ``docker compose down -v``.
 
-You should now have a ais-exporter, Prometheus and Grafana environment
+You should now have a aisexporter, Prometheus and Grafana environment
 running that you can experiment with. Grafana should now be accessible at
 ``http://localhost:3000``. Login to Grafana with credentials shown below.
 
@@ -50,9 +50,9 @@ username - admin
 password - foobar
 ```
 
-Once logged in you should be able to view the ais-exporter dashboard. You
+Once logged in you should be able to view the aisexporter dashboard. You
 may need to click the dashboard selector dropdown ``Home`` to select the
-ais-exporter dashboard.
+aisexporter dashboard.
 
   > Recent versions of Grafana added the concept of provisioning which assists
   > with the process of automatically adding Datasources and Dashboards. The
@@ -60,6 +60,6 @@ ais-exporter dashboard.
   > ``dashboards`` directories. These directories contain YAML files which
   > specify which datasource or dashboards should be installed automatically.
   >
-  > The ais-exporter dashboard has been added into the
+  > The aisexporter dashboard has been added into the
   > ``/grafana/provisioning/dashboards`` so that it will be available by
   > default. You should be able to select and display it.

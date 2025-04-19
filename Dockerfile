@@ -10,7 +10,7 @@ RUN addgroup -S aisexp && adduser -S aisexp -G aisexp
 
 COPY ./dist/aisexporter-*-py3-none-any.whl /tmp/
 
-# install ais-exporter (including dependencies and requirements)
+# install aisexporter (including dependencies and requirements)
 RUN \
   apk update && \
   apk add --no-cache --virtual .build-deps musl-dev gcc && \

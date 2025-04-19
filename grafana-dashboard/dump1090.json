@@ -54,7 +54,7 @@
       }
     ]
   },
-  "description": "This dashboard displays ais metrics that get exposed to Prometheus by the ais-exporter.",
+  "description": "This dashboard displays ais metrics that get exposed to Prometheus by the aisexporter.",
   "editable": true,
   "gnetId": 768,
   "graphTooltip": 0,
@@ -2342,7 +2342,7 @@
     ]
   },
   "timezone": "browser",
-  "title": "ais-exporter",
+  "title": "aisexporter",
   "uid": "jYDJZoviz",
   "variables": {
     "list": []

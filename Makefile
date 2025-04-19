@@ -9,7 +9,7 @@ PYTHON := python3
 # Do not remove this block. It is used by the 'help' rule when
 # constructing the help output.
 # help:
-# help: ais-exporter Makefile help
+# help: aisexporter Makefile help
 # help:
 
 
@@ -88,7 +88,7 @@ check-lint:
 # help: container             - build Docker container
 .PHONY: container
 container: dist
-	@docker build -t clawsicus/ais-exporter .
+	@docker build -t clawsicus/aisexporter .
 
 
 # help: checks                - perform all checks

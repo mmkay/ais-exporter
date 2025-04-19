@@ -10,17 +10,17 @@ installed using the Python package manager *pip*. It is recommended to install
 this package into a virtual environment.
 
 ```shell
-$ pip install ais-exporter
+$ pip install aisexporter
 ```
 
 The package can optionally make use of the *uvloop* package which provides a
 more efficient implementation of the asyncio event loop.
 
 ```shell
-$ pip install ais-exporter[uvloop]
+$ pip install aisexporter[uvloop]
 ```
 
-The ais-exporter has also been packaged into a Docker container. See the
+The aisexporter has also been packaged into a Docker container. See the
 [Docker](#docker) section below for more details about that.
 
 ## Run
@@ -32,13 +32,13 @@ The ais exporter accepts a number of command line arguments which can be
 displayed using the standard command line help request.
 
 ```shell
-$ ais-exporter -h
+$ aisexporter -h
 ```
 
 An example usage is shown below.
 
 ```shell
-$ ais-exporter \
+$ aisexporter \
   --resource-path=http://192.168.1.201:8383 \
   --port=9205 \
   --latitude=-34.9285 \
@@ -54,14 +54,14 @@ In the example command the exporter is instructed to monitor a ais
 instance running on a machine with the IP address 192.168.1.201 using the port
 8080.
 
-The ais-exporter can also monitor ais state via the file system if
+The aisexporter can also monitor ais state via the file system if
 you run it on the same machine as the ais process. In this scenario you
 would pass a file system path to the ``--resource-path`` command line argument.
 
 For example:
 
 ```shell
-$ ais-exporter \
+$ aisexporter \
   --resource-path=/path/to/ais-base-dir/data \
   ...
 ```
@@ -69,7 +69,7 @@ $ ais-exporter \
 A more concrete example for ais-fa would be:
 
 ```shell
-$ ais-exporter \
+$ aisexporter \
   --resource-path=/run/ais-fa/ \
   ...
 ```
@@ -123,7 +123,7 @@ ais_stats_cpr_airborne{time_period="total"} 18293
 ...
 ```
 
-The metrics exposed by the ais-exporter are all prefixed with the
+The metrics exposed by the aisexporter are all prefixed with the
 *ais_* string so as to provide a helpful namespacing which makes them
 easier to find in visualisation tools such as Grafana.
 
@@ -185,8 +185,8 @@ with an entry point that runs the ais exporter application. The default
 command argument is ``--help`` which will display help information.
 
 ```shell
-$ docker run -it --rm clawsicus/ais-exporter
-usage: ais-exporter [-h] [--resource-path <ais url>]
+$ docker run -it --rm clawsicus/aisexporter
+usage: aisexporter [-h] [--resource-path <ais url>]
 ...
 ```
 
@@ -196,7 +196,7 @@ own custom command line arguments to it:
 ```shell
 $ docker run -p 9205:9205 \
   --detach \
-  clawsicus/ais-exporter \
+  clawsicus/aisexporter \
   --resource-path=http://192.168.1.201:8383 \
   --latitude=-34.9285 \
   --longitude=138.6007
@@ -209,18 +209,18 @@ using curl.
 $ curl http://127.0.0.1:9205/metrics
 ```
 
-Next you would configure a Prometheus server to scape the ais-exporter
+Next you would configure a Prometheus server to scape the aisexporter
 container on port 9205.
 
 
 ## Demonstration
 
 A demonstration environment can be found in the ``demo`` directory. It uses
-Docker Compose to orchestrate containers running ais-exporter, Prometheus
+Docker Compose to orchestrate containers running aisexporter, Prometheus
 and Grafana to facilitate experimentation with metric collection and graphing.
 
 This provides a really quick and easy method for checking out the
-ais-exporter.
+aisexporter.
 
 
 ## Developer Notes
@@ -231,7 +231,7 @@ The following steps are used to make a new software release:
 
 - Ensure current branch is set to master and is up to date.
 
-- Create a virtual environment, install dependencies and the ais-exporter.
+- Create a virtual environment, install dependencies and the aisexporter.
 
   ```shell
   $ make venv
@@ -277,7 +277,7 @@ The following steps are used to make a new software release:
 
 The following steps are used to make a new software release:
 
-- Generate the ais-exporter Python package distribution.
+- Generate the aisexporter Python package distribution.
 
   ```shell
   (d1090exp) $ make dist
@@ -291,18 +291,18 @@ The following steps are used to make a new software release:
   password
   ```
 
-- Build the ais-exporter Docker container.
+- Build the aisexporter Docker container.
 
   ```shell
-  (d1090exp) $ docker build -t clawsicus/ais-exporter .
+  (d1090exp) $ docker build -t clawsicus/aisexporter .
   ```
 
 - Perform a simple test of the container by specifying its full namespace to
   run that container image.
 
   ```shell
-  $ docker run -it --rm clawsicus/ais-exporter
-  usage: ais-exporter [-h] [--resource-path <ais url>]
+  $ docker run -it --rm clawsicus/aisexporter
+  usage: aisexporter [-h] [--resource-path <ais url>]
   ...
   ```
 
@@ -311,7 +311,7 @@ The following steps are used to make a new software release:
   ```shell
   $ docker run -p 9205:9205 \
     --detach \
-    clawsicus/ais-exporter \
+    clawsicus/aisexporter \
     --resource-path=http://192.168.1.201:8383 \
     --latitude=-34.9285 \
     --longitude=138.6007
@@ -327,5 +327,5 @@ The following steps are used to make a new software release:
 - Publish the new container to DockerHub using:
 
   ```shell
-  (d1090exp) $ docker push clawsicus/ais-exporter:<version>
+  (d1090exp) $ docker push clawsicus/aisexporter:<version>
   ```

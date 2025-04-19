@@ -27,7 +27,7 @@ def main():
     """Run the ais Prometheus exporter"""
 
     parser = argparse.ArgumentParser(
-        prog="ais-exporter", description="ais Prometheus Exporter"
+        prog="aisexporter", description="ais Prometheus Exporter"
     )
     parser.add_argument(
         "--resource-path",

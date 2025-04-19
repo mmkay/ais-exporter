@@ -7,9 +7,9 @@ import asynctest
 from aiohttp import ClientSession, web
 from aioprometheus import REGISTRY
 
-import ais-exporter.exporter
-import ais-exporter.metrics
-from ais-exporter import ais-exporter
+import aisexporter.exporter
+import aisexporter.metrics
+from aisexporter import aisexporter
 
 GOLDEN_DATA_DIR = Path(__file__).parent / "golden-data"
 ships_DATA_FILE = GOLDEN_DATA_DIR / "ships.json"
@@ -62,14 +62,14 @@ class TestExporter(asynctest.TestCase):  # pylint: disable=missing-class-docstri
         REGISTRY.clear()
 
     async def test_exporter(self):
-        """Check ais-exporter application"""
+        """Check aisexporter application"""
         # Start a fake ais service that the exporter can scrape
         ds = aisServiceEmulator()
         try:
             await ds.start()
 
-            # Start the ais-exporter
-            de = ais-exporter(
+            # Start the aisexporter
+            de = aisexporter(
                 resource_path=ds.url,
                 origin=TEST_ORIGIN,
             )
@@ -77,7 +77,7 @@ class TestExporter(asynctest.TestCase):  # pylint: disable=missing-class-docstri
             await de.start()
             await asyncio.sleep(0.3)
 
-            # Scrape the ais-exporter just as Prometheus would
+            # Scrape the aisexporter just as Prometheus would
             async with ClientSession() as session:
                 async with session.get(de.svr.metrics_url, timeout=0.3) as resp:
                     if not resp.status == 200:
@@ -85,7 +85,7 @@ class TestExporter(asynctest.TestCase):  # pylint: disable=missing-class-docstri
                     data = await resp.text()
 
             # Check that expected metrics are present in the response
-            specs = ais-exporter.metrics.Specs
+            specs = aisexporter.metrics.Specs
             for _attr, label, _doc in specs["ships"]:
                 self.assertIn(f"{de.prefix}{label}{{", data)
             for _group_name, group_metrics in specs["stats"].items():
