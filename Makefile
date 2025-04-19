@@ -63,26 +63,26 @@ coverage:
 .PHONY: style
 style:
 	@isort . --profile black
-	@black src/ais_exporter setup.py tests
+	@black src/aisexporter setup.py tests
 
 
 # help: check-style           - perform code format compliance check
 .PHONY: check-style
 check-style:
 	@isort . --check-only --profile black
-	@black --check src/ais_exporter setup.py tests
+	@black --check src/aisexporter setup.py tests
 
 
 # help: check-types           - check type hint annotations
 .PHONY: check-types
 check-types:
-	@cd src; mypy -p ais-exporter --ignore-missing-imports
+	@cd src; mypy -p aisexporter --ignore-missing-imports
 
 
 # help: check-lint            - run static analysis checks
 .PHONY: check-lint
 check-lint:
-	@pylint --rcfile=.pylintrc ais-exporter setup.py tests
+	@pylint --rcfile=.pylintrc aisexporter setup.py tests
 
 
 # help: container             - build Docker container
@@ -106,7 +106,7 @@ dist:
 # help: dist-upload           - upload a wheel distribution package
 .PHONY: dist-upload
 dist-upload: dist
-	@twine upload dist/ais-exporter-*-py3-none-any.whl
+	@twine upload dist/aisexporter-*-py3-none-any.whl
 
 
 # Keep these lines at the end of the file to retain nice help

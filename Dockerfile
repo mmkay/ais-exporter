@@ -8,16 +8,16 @@ ENV PYTHONUNBUFFERED 1
 # create the app user
 RUN addgroup -S aisexp && adduser -S aisexp -G aisexp
 
-COPY ./dist/ais-exporter-*-py3-none-any.whl /tmp/
+COPY ./dist/aisexporter-*-py3-none-any.whl /tmp/
 
 # install ais-exporter (including dependencies and requirements)
 RUN \
   apk update && \
   apk add --no-cache --virtual .build-deps musl-dev gcc && \
   pip install pip -U --no-cache-dir && \
-  pip install /tmp/ais-exporter-*-py3-none-any.whl --no-cache-dir && \
+  pip install /tmp/aisexporter-*-py3-none-any.whl --no-cache-dir && \
   apk --purge del .build-deps && \
-  rm -rf /tmp/ais-exporter-*-py3-none-any.whl
+  rm -rf /tmp/aisexporter-*-py3-none-any.whl
 
 # switch to non-root user
 USER aisexp
@@ -26,5 +26,5 @@ WORKDIR /tmp
 
 EXPOSE 9205
 
-ENTRYPOINT ["python", "-m", "ais-exporter"]
+ENTRYPOINT ["python", "-m", "aisexporter"]
 CMD ["--help"]

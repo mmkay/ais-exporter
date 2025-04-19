@@ -5,8 +5,8 @@ source =
 
 [paths]
 source =
-    src/ais_exporter
-    **/site-packages/ais_exporter
+    src/aisexporter
+    **/site-packages/aisexporter
 
 [report]
 exclude_lines =
