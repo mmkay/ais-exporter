@@ -7,7 +7,7 @@ regexp = re.compile(r".*__version__ = [\'\"](.*?)[\'\"]", re.S)
 
 
 init_file = os.path.join(
-    os.path.dirname(__file__), "src", "ais-exporter", "__init__.py"
+    os.path.dirname(__file__), "src", "ais_exporter", "__init__.py"
 )
 with open(init_file, "r") as f:  # pylint: disable=unspecified-encoding
     module_content = f.read()
@@ -66,6 +66,6 @@ if __name__ == "__main__":
             "Topic :: System :: Monitoring",
         ],
         entry_points={
-            "console_scripts": ["ais-exporter = ais-exporter.__main__:main"]
+            "console_scripts": ["ais-exporter = ais_exporter.__main__:main"]
         },
     )
