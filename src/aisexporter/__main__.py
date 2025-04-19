@@ -3,7 +3,7 @@ import asyncio
 import logging
 import os
 
-from .exporter import ais_exporter
+from .exporter import aisexporter
 
 # try to import uvloop - optional
 try:
@@ -108,7 +108,7 @@ def main():
         args.origin = (args.latitude, args.longitude)
 
     loop = asyncio.get_event_loop()
-    mon = ais_exporter(
+    mon = aisexporter(
         resource_path=args.resource_path,
         host=args.host,
         port=args.port,

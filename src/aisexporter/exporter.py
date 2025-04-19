@@ -216,7 +216,7 @@ async def _fetch(
     return data
 
 
-class ais_exporter:
+class aisexporter:
     """
     This class is responsible for fetching, parsing and exporting ais
     metrics to Prometheus.
