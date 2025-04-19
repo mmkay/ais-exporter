@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 1524,
+  "id": 1610,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -47,22 +47,6 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "blue",
-                "value": 3500
-              },
-              {
-                "color": "yellow",
-                "value": 10000
-              },
-              {
-                "color": "orange",
-                "value": 20000
-              },
-              {
-                "color": "red",
-                "value": 30000
               }
             ]
           }
@@ -96,12 +80,11 @@
               "showLegend": true,
               "style": {
                 "color": {
-                  "field": "alt",
+                  "field": "hop_count",
                   "fixed": "dark-green"
                 },
                 "opacity": 0.9,
                 "rotation": {
-                  "field": "heading",
                   "fixed": 0,
                   "max": 360,
                   "min": -360,
@@ -113,13 +96,18 @@
                   "min": 2
                 },
                 "symbol": {
-                  "fixed": "img/icons/marker/plane.svg",
+                  "fixed": "img/icons/marker/circle.svg",
                   "mode": "fixed"
+                },
+                "text": {
+                  "field": "name 1",
+                  "fixed": "",
+                  "mode": "field"
                 },
                 "textConfig": {
                   "fontSize": 12,
                   "offsetX": 0,
-                  "offsetY": 0,
+                  "offsetY": 15,
                   "textAlign": "center",
                   "textBaseline": "middle"
                 }
@@ -174,44 +162,14 @@
           "legendFormat": "__auto",
           "range": false,
           "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PC34A0BC456D4E3FE"
-          },
-          "editorMode": "builder",
-          "exemplar": false,
-          "expr": "ais_heading",
-          "format": "table",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "C"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PC34A0BC456D4E3FE"
-          },
-          "editorMode": "builder",
-          "exemplar": false,
-          "expr": "ais_alt",
-          "format": "table",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "D"
         }
       ],
-      "title": "Planes",
+      "title": "Ships",
       "transformations": [
         {
           "id": "joinByField",
           "options": {
-            "byField": "hex",
+            "byField": "mmsi",
             "mode": "outer"
           }
         },
@@ -223,39 +181,42 @@
               "Time 2": true,
               "Time 3": true,
               "Time 4": true,
+              "Time 5": true,
+              "Time 6": true,
+              "Time 7": true,
               "__name__ 1": true,
               "__name__ 2": true,
               "__name__ 3": true,
               "__name__ 4": true,
-              "flight 1": false,
-              "flight 2": true,
-              "flight 3": true,
-              "flight 4": true,
+              "__name__ 5": true,
+              "__name__ 6": true,
+              "__name__ 7": true,
+              "country 2": true,
               "instance 1": true,
               "instance 2": true,
               "instance 3": true,
               "instance 4": true,
+              "instance 5": true,
+              "instance 6": true,
+              "instance 7": true,
               "job 1": true,
               "job 2": true,
               "job 3": true,
               "job 4": true,
-              "reg 2": true,
-              "reg 3": true,
-              "reg 4": true,
-              "type 2": true,
-              "type 3": true,
-              "type 4": true
+              "job 5": true,
+              "job 6": true,
+              "job 7": true,
+              "name 2": true
             },
             "indexByName": {},
             "renameByName": {
               "Value #A": "lat",
               "Value #B": "lon",
-              "Value #C": "heading",
-              "Value #D": "alt",
-              "flight 1": "flight",
-              "hex": "",
-              "reg 1": "reg",
-              "type 1": "type"
+              "Value #C": "altitude",
+              "Value #D": "hop_count",
+              "Value #E": "rssi",
+              "Value #G": "hop_limit",
+              "Value #H": "last_seen"
             }
           }
         }
@@ -314,13 +275,13 @@
             "uid": "PC34A0BC456D4E3FE"
           },
           "editorMode": "code",
-          "expr": "count(count by (hex) (ais_lat))",
+          "expr": "count(count by (mmsi) (ais_lat))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Spotted planes",
+      "title": "Spotted sships",
       "type": "stat"
     },
     {
@@ -375,13 +336,13 @@
             "uid": "PC34A0BC456D4E3FE"
           },
           "editorMode": "code",
-          "expr": "count(count by (reg) (ais_lat))",
+          "expr": "count(count by (name) (ais_lat))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Planes with registration",
+      "title": "Ships with name",
       "type": "stat"
     },
     {
@@ -392,94 +353,24 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 20,
-        "y": 0
-      },
-      "id": 4,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "9.5.3",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PC34A0BC456D4E3FE"
-          },
-          "editorMode": "code",
-          "expr": "count(count by (type) (ais_lat))",
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Planes with type",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PC34A0BC456D4E3FE"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
+            "fixedColor": "green",
+            "mode": "fixed"
           },
           "custom": {
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
+            "fillOpacity": 80,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
-            "lineInterpolation": "linear",
             "lineWidth": 1,
-            "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -492,10 +383,6 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           }
@@ -503,84 +390,32 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 12,
+        "h": 17,
+        "w": 8,
         "x": 12,
         "y": 4
       },
-      "id": 5,
+      "id": 6,
       "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
         "legend": {
           "calcs": [],
           "displayMode": "list",
           "placement": "bottom",
           "showLegend": true
         },
+        "orientation": "auto",
+        "showValue": "auto",
+        "stacking": "none",
         "tooltip": {
           "mode": "single",
           "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PC34A0BC456D4E3FE"
-          },
-          "editorMode": "code",
-          "expr": "ais_recent_ships_with_position",
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Planes with position per receiver",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PC34A0BC456D4E3FE"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          }
         },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 6,
-        "x": 12,
-        "y": 12
-      },
-      "id": 6,
-      "options": {
-        "displayMode": "basic",
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true,
-        "valueMode": "color"
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
       },
       "pluginVersion": "9.5.3",
       "targets": [
@@ -591,79 +426,17 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "topk(50, count by (type) (ais_lat{type!=\"\"}))",
+          "expr": "topk(50, count by (country) (ais_lat))",
+          "format": "table",
           "instant": true,
           "legendFormat": "__auto",
           "range": false,
           "refId": "A"
         }
       ],
-      "title": "Most popular types",
-      "type": "bargauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PC34A0BC456D4E3FE"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 6,
-        "x": 18,
-        "y": 12
-      },
-      "id": 7,
-      "options": {
-        "displayMode": "basic",
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true,
-        "valueMode": "color"
-      },
-      "pluginVersion": "9.5.3",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PC34A0BC456D4E3FE"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "topk(50, count by (country) (label_replace(ais_lat{reg!=\"\"}, \"country\", \"$1\", \"reg\", \"(.*)-.+\")))",
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "A"
-        }
-      ],
-      "title": "Planes by country",
-      "type": "bargauge"
+      "title": "Ships by country",
+      "transformations": [],
+      "type": "barchart"
     }
   ],
   "refresh": "",
@@ -679,8 +452,8 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Positions",
-  "uid": "e93e1499-0692-44ba-b3e6-fcc9f8a46f4b",
-  "version": 10,
+  "title": "Ships",
+  "uid": "fa675a0a-409e-4958-a888-b19e0b24fd50",
+  "version": 2,
   "weekStart": ""
 }
