@@ -425,6 +425,8 @@ class aisexporter:
                 "name": a[31],
                 "country": a[22],
             }
+            if a[1] is None or a[2] is None:
+                continue
             d["lat"].set(ship_data, a[1])
             d["lon"].set(ship_data, a[2])
 
